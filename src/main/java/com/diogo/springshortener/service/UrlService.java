@@ -7,8 +7,8 @@ import com.diogo.springshortener.model.Url;
 public interface UrlService {
 	
 	public List<Url> searchAll();
+	public String searchByUrlShortened(String shortenedUrl);
 	public Url insert(Url url);
-	public Url update(Url url);
-	public void delete(String urlId);
-	
+	public Url update(Long urlId, Url url);
+	public void delete(Long urlId);
 }

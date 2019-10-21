@@ -2,63 +2,72 @@ package com.diogo.springshortener.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import org.springframework.data.annotation.Id;
+
+import com.diogo.springshortener.commom.Converter;
+
 
 @Entity
-@Table(name="URL")
+@Table(name="TB_URL")
 public class Url implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "URL_CD_ID")
-	private Long id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
 	
-	@Column(name = "URL_TX_ADDRESS")
-	private String address;
+	@NotNull
+	private String url;
 	
-	@Column(name = "URL_TX_SHORTNED")
-	private String urlShortned;
+	private String urlShortened;
 	
-	boolean active;
+	@NotNull
+	private Boolean active;
 	
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
-
-	public void setId(Long id) {
+	
+	public void setId(long id) {
 		this.id = id;
 	}
-
+	
 	public String getUrl() {
-		return address;
+		return url;
 	}
 	
-	public void setUrl(String address) {
-		this.address = address;
+	public void setUrl(String url) {
+		if (!url.contains("://")) {
+			this.url = "http://" + url;
+		} else
+			this.url = url;
 	}
 	
-	public String getUrlShortned() {
-		return urlShortned;
-	}
-
-	public void setUrlShortned(String urlShortned) {
-		this.urlShortned = urlShortned;
+	public String getUrlShortened() {
+		return urlShortened;
 	}
 	
-	public boolean isActive() {
+	public void setUrlShortened(String urlShortened) {
+		Converter converter = new Converter();
+		if (urlShortened.isEmpty()) {
+			this.urlShortened = converter.getGenerateName(6);
+		} else 
+			this.urlShortened = urlShortened;
+	}
+	
+	public Boolean getActive() {
 		return active;
 	}
 	
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 }
