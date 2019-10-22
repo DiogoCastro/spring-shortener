@@ -56,8 +56,8 @@ public class Url implements Serializable{
 	}
 	
 	public String getUrlShortened() throws UnknownHostException {
-		String host = InetAddress.getLoopbackAddress().getHostAddress();
-		return host + ":8080/api/url/" + urlShortened;
+//		String host = InetAddress.getLoopbackAddress().getHostAddress();
+		return "https://encurtai.herokuapp.com/api/url/" + urlShortened;
 	}
 	
 	public void setUrlShortened(String urlShortened) {
