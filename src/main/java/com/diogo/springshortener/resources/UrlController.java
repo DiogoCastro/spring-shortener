@@ -47,7 +47,6 @@ public class UrlController {
 		throw new IOException();
 	}
 	
-	@CrossOrigin
 	@PostMapping("/url")
 	public Url saveUrl(@Valid @RequestBody Url url) {
 		return service.insert(url);
