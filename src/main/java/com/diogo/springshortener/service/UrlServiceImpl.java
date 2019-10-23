@@ -20,6 +20,11 @@ public class UrlServiceImpl implements UrlService{
 	}
 	
 	@Override
+	public Url search(Long urlId) {
+		return urlRepo.getOne(urlId);
+	}
+	
+	@Override
 	public String searchByUrlShortened(String urlShortened) {
 		Url url = new Url();
 		List<Url> list = this.urlRepo.findByUrlShortened(urlShortened);

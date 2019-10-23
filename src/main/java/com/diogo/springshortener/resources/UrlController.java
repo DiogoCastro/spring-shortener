@@ -32,11 +32,16 @@ public class UrlController {
 	private UrlService service;
 		
 	
-	@GetMapping("/urls")
+	@GetMapping()
 	public List<Url> findAll() {
 		List<Url> list = new ArrayList<>();
 		service.searchAll().iterator().forEachRemaining(list::add);
 		return list;
+	}
+	
+	@GetMapping("/{id}")
+	public Url findById(@PathVariable Long id) {
+		return service.search(id);
 	}
 	
 	@GetMapping("/url/{urlShortened}")
