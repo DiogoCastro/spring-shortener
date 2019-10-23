@@ -39,11 +39,6 @@ public class UrlController {
 		return list;
 	}
 	
-//	@GetMapping("/url/{urlShortened}")
-//	public String redirect (@PathVariable String urlShortened) {
-//		return service.searchByUrlShortened(urlShortened);
-//	}
-	
 	@GetMapping("/url/{urlShortened}")
 	public RedirectView redirect(@PathVariable String urlShortened) throws IOException {		
 		String url = service.searchByUrlShortened(urlShortened);
@@ -52,6 +47,7 @@ public class UrlController {
 		throw new IOException();
 	}
 	
+	@CrossOrigin
 	@PostMapping("/url")
 	public Url saveUrl(@Valid @RequestBody Url url) {
 		return service.insert(url);
